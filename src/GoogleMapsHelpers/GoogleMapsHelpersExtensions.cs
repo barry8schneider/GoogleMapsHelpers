@@ -48,16 +48,15 @@ namespace GoogleMapsHelpers
         /// <param name="helper"></param>
         /// <param name="apiKey"></param>
         /// <param name="sensor"></param>
-        /// <param name="libraries"></param>
         /// <param name="mapOptions"></param>
         /// <returns></returns>
         public static IHtmlString StaticMapsApi(
-            this HtmlHelper helper, string apiKey, bool sensor, Libraries libraries, MapOptions mapOptions)
+            this HtmlHelper helper, string apiKey, bool sensor, MapOptions mapOptions)
         {
             var apiScriptTagBuilder = new ScriptTagBuilder();
 
             apiScriptTagBuilder.SetScriptSource(
-                SourceAddressFactory.GetSourceAddress(apiKey, sensor, libraries));
+                SourceAddressFactory.GetSourceAddress(apiKey, sensor, Libraries.None));
 
             var mapOptionsScriptTagBuilder = new ScriptTagBuilder();
 
@@ -65,6 +64,41 @@ namespace GoogleMapsHelpers
                 MapOptionsScriptBodyFactory.GetMapOptionsScriptBody(mapOptions));
 
             return new HtmlString(apiScriptTagBuilder.GetResult() + mapOptionsScriptTagBuilder.GetResult());
+        }
+
+        /// <summary>
+        /// Renders ScriptTags needed to display Static Google Maps
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="sensor"></param>
+        /// <param name="mapOptions"></param>
+        /// <returns></returns>
+        public static IHtmlString StaticMapsApi(this HtmlHelper helper, bool sensor, MapOptions mapOptions)
+        {
+            return StaticMapsApi(helper, null, sensor, mapOptions);
+        }
+
+        /// <summary>
+        /// Renders ScriptTags needed to display Static Google Maps
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="apiKey"></param>
+        /// <param name="mapOptions"></param>
+        /// <returns></returns>
+        public static IHtmlString StaticMapsApi(this HtmlHelper helper, string apiKey, MapOptions mapOptions)
+        {
+            return StaticMapsApi(helper, apiKey, false, mapOptions);
+        }
+
+        /// <summary>
+        /// Renders ScriptTags needed to display Static Google Maps
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="mapOptions"></param>
+        /// <returns></returns>
+        public static IHtmlString StaticMapsApi(this HtmlHelper helper, MapOptions mapOptions)
+        {
+            return StaticMapsApi(helper, null, false, mapOptions);
         }
     }
 }
