@@ -7,19 +7,34 @@
  * Description: 
  * ============================================================= */
 
-using System;
+using GoogleMapsHelpers.Resources;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
 
 namespace GoogleMapsHelpers
 {
     /// <summary>
     /// HTML Helper extensions that can be used from ASP.NET MVC views to display Google Maps
     /// </summary>
-    public class GoogleMapsHelpersExtensions
+    public static class GoogleMapsHelpersExtensions
     {
+        /// <summary>
+        /// Displays the placeholder for the Google Maps
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="searchBox">Boolean value indicating whether the search box should be there or not.</param>
+        /// <param name="htmlAttributes">Html attributes for the Google Maps place holder</param>
+        /// <returns></returns>
+        public static IHtmlString GoogleMaps(this HtmlHelper helper, object htmlAttributes)
+        {
+            IDictionary<string, object> attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
 
+            var builder = new TagBuilder(Constants.Div);
+            builder.MergeAttributes(attributes);
+            builder.MergeAttribute(Constants.Id, Constants.MapId);
+
+            return new HtmlString(builder.ToString(TagRenderMode.Normal));
+        }
     }
 }

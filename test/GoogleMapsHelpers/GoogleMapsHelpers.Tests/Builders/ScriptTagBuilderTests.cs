@@ -1,5 +1,4 @@
-﻿using System;
-using GoogleMapsHelpers.Builders;
+﻿using GoogleMapsHelpers.Builders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GoogleMapsHelpers.Tests.Builders
@@ -7,7 +6,7 @@ namespace GoogleMapsHelpers.Tests.Builders
     [TestClass]
     public class ScriptTagBuilderTests
     {
-        private TestScriptTagBuilder _scriptTagBuilder;
+        private  TestScriptTagBuilder _scriptTagBuilder;
 
         [TestInitialize]
         public void SetUp()
