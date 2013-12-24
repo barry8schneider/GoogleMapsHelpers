@@ -7,8 +7,9 @@
  * Description: 
  * ============================================================= */
 
-using System.Text;
 using GoogleMapsHelpers.Builders;
+using GoogleMapsHelpers.Factories;
+using GoogleMapsHelpers.Models;
 using GoogleMapsHelpers.Resources;
 using System.Collections.Generic;
 using System.Web;
@@ -39,6 +40,31 @@ namespace GoogleMapsHelpers
             builder.MergeAttribute(Constants.Id, Constants.MapId);
 
             return new HtmlString(builder.ToString(TagRenderMode.Normal));
+        }
+
+        /// <summary>
+        /// Renders ScriptTags needed to display Static Google Maps
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="apiKey"></param>
+        /// <param name="sensor"></param>
+        /// <param name="libraries"></param>
+        /// <param name="mapOptions"></param>
+        /// <returns></returns>
+        public static IHtmlString StaticMapsApi(
+            this HtmlHelper helper, string apiKey, bool sensor, Libraries libraries, MapOptions mapOptions)
+        {
+            var apiScriptTagBuilder = new ScriptTagBuilder();
+
+            apiScriptTagBuilder.SetScriptSource(
+                SourceAddressFactory.GetSourceAddress(apiKey, sensor, libraries));
+
+            var mapOptionsScriptTagBuilder = new ScriptTagBuilder();
+
+            mapOptionsScriptTagBuilder.AddScriptBody(
+                MapOptionsScriptBodyFactory.GetMapOptionsScriptBody(mapOptions));
+
+            return new HtmlString(apiScriptTagBuilder.GetResult() + mapOptionsScriptTagBuilder.GetResult());
         }
     }
 }

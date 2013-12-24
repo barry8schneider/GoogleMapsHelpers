@@ -18,7 +18,7 @@ namespace GoogleMapsHelpers.Builders
         /// <summary>
         /// Tag builder used to create Script Tag
         /// </summary>
-        private TagBuilder TagBuilder;
+        protected TagBuilder TagBuilder;
 
         /// <summary>
         /// Creates a new instance of ScriptTagBuilder class.

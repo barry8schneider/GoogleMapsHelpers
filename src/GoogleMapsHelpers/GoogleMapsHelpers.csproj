@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\MapOptionsScriptTagBuilder.cs" />
     <Compile Include="Builders\ScriptTagBuilder.cs" />
     <Compile Include="Factories\SourceAddressFactory.cs" />
     <Compile Include="GoogleMapsHelpersExtensions.cs" />
