@@ -25,5 +25,11 @@ namespace GoogleMapsHelpers.Tests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void GoogleMapsHelpersExtension_StaticMapsApi_Test()
+        {
+            
+        }
     }
 }

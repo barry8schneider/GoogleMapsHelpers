@@ -48,6 +48,5 @@ namespace GoogleMapsHelpers.Resources
         internal static string Amp = "&";
         internal static string ApiAttribute = "key=";
         internal static string LibrariesKey = "libraries=";
-        internal static string PlacesAPI = "places";
     }
 }

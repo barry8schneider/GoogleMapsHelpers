@@ -6,12 +6,12 @@ namespace GoogleMapsHelpers.Tests.Builders
     [TestClass]
     public class ScriptTagBuilderTests
     {
-        private  TestScriptTagBuilder _scriptTagBuilder;
+        private ScriptTagBuilder _scriptTagBuilder;
 
         [TestInitialize]
         public void SetUp()
         {
-            _scriptTagBuilder = new TestScriptTagBuilder();
+            _scriptTagBuilder = new ScriptTagBuilder();
         }
 
         [TestMethod]
@@ -47,22 +47,6 @@ namespace GoogleMapsHelpers.Tests.Builders
             var actual = _scriptTagBuilder.GetResult();
 
             Assert.AreEqual(expected, actual);
-        }
-    }
-
-    /* Wrapper class that extends ScriptTagBuilder for testing
-     * ======================================================= */
-
-    public class TestScriptTagBuilder : ScriptTagBuilder
-    {
-        new public void SetScriptSource(string scriptSource)
-        {
-            base.SetScriptSource(scriptSource);
-        }
-
-        new public void AddScriptBody(string scriptBody)
-        {
-            base.AddScriptBody(scriptBody);
         }
     }
 }

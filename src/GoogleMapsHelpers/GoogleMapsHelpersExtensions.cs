@@ -7,6 +7,8 @@
  * Description: 
  * ============================================================= */
 
+using System.Text;
+using GoogleMapsHelpers.Builders;
 using GoogleMapsHelpers.Resources;
 using System.Collections.Generic;
 using System.Web;
@@ -23,12 +25,14 @@ namespace GoogleMapsHelpers
         /// Displays the placeholder for the Google Maps
         /// </summary>
         /// <param name="helper"></param>
-        /// <param name="searchBox">Boolean value indicating whether the search box should be there or not.</param>
         /// <param name="htmlAttributes">Html attributes for the Google Maps place holder</param>
-        /// <returns></returns>
-        public static IHtmlString GoogleMaps(this HtmlHelper helper, object htmlAttributes)
+        /// <returns>Completed map container div tag</returns>
+        public static IHtmlString GoogleMaps(
+            this HtmlHelper helper,
+            object htmlAttributes)
         {
-            IDictionary<string, object> attributes = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+            IDictionary<string, object> attributes =
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
 
             var builder = new TagBuilder(Constants.Div);
             builder.MergeAttributes(attributes);

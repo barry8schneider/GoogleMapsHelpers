@@ -18,13 +18,13 @@ namespace GoogleMapsHelpers.Builders
         /// <summary>
         /// Tag builder used to create Script Tag
         /// </summary>
-        protected TagBuilder TagBuilder;
+        private TagBuilder TagBuilder;
 
         /// <summary>
         /// Creates a new instance of ScriptTagBuilder class.
         /// Creates opening script tag.
         /// </summary>
-        protected ScriptTagBuilder()
+        public ScriptTagBuilder()
         {
             TagBuilder = new TagBuilder(Constants.Script);
             TagBuilder.MergeAttribute(Constants.Type, Constants.TextJavaScript);
@@ -34,7 +34,7 @@ namespace GoogleMapsHelpers.Builders
         /// Sets the source(src=) for the script tag 
         /// </summary>
         /// <param name="scriptSource">Script Source Address</param>
-        protected virtual void SetScriptSource(string scriptSource)
+        public virtual void SetScriptSource(string scriptSource)
         {
             TagBuilder.MergeAttribute(Constants.Src, scriptSource);    
         }
@@ -43,7 +43,7 @@ namespace GoogleMapsHelpers.Builders
         /// Adds JavaScript code inside the script tag
         /// </summary>
         /// <param name="scriptBody">JavaScript code to go inside the script tag</param>
-        protected virtual void AddScriptBody(string scriptBody)
+        public virtual void AddScriptBody(string scriptBody)
         {
             TagBuilder.SetInnerText(scriptBody);
         }

@@ -43,7 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Builders\ScriptTagBuilder.cs" />
+    <Compile Include="Factories\SourceAddressFactory.cs" />
     <Compile Include="GoogleMapsHelpersExtensions.cs" />
+    <Compile Include="Models\Libraries.cs" />
     <Compile Include="Models\MapOptions.cs" />
     <Compile Include="Models\MapTypes.cs" />
     <Compile Include="Models\PlaceOptions.cs" />
