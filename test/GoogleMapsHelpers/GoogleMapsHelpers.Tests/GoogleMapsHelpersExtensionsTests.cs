@@ -32,7 +32,7 @@ namespace GoogleMapsHelpers.Tests
         public void GoogleMapsHelpersExtension_StaticMapsApi_Test()
         {
             var expected = new HtmlString("<script src=\"" + SourceAddressFactory.GetSourceAddress(null, true, Libraries.None) + "\" type=\"text/javascript\"></script>").ToString();
-            var actual = new HtmlHelper(new ViewContext(), new ViewPage()).StaticMapsApi(null, true, Libraries.None).ToString();
+            var actual = new HtmlHelper(new ViewContext(), new ViewPage()).StaticMapsApi(null, true, null).ToString();
 
             StringAssert.Contains(actual, expected);
         }
