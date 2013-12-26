@@ -7,6 +7,9 @@
  * Description: 
  * ============================================================= */
 
+using System.Configuration;
+using System.Diagnostics;
+using System.Linq;
 using GoogleMapsHelpers.Builders;
 using GoogleMapsHelpers.Factories;
 using GoogleMapsHelpers.Models;
@@ -110,7 +113,7 @@ namespace GoogleMapsHelpers
             bool sensor,
             MapOptions mapOptions)
         {
-            return StaticMapsApi(helper, null, sensor, mapOptions);
+            return StaticMapsApi(helper, GetApiKeyFromConfig(), sensor, mapOptions);
         }
 
         /// <summary>
@@ -138,7 +141,7 @@ namespace GoogleMapsHelpers
             this HtmlHelper helper,
             MapOptions mapOptions)
         {
-            return StaticMapsApi(helper, null, false, mapOptions);
+            return StaticMapsApi(helper, GetApiKeyFromConfig(), false, mapOptions);
         }
 
         /// <summary>
@@ -178,7 +181,7 @@ namespace GoogleMapsHelpers
         public static IHtmlString PlacesApi(this HtmlHelper helper, bool sensor,
             PlaceOptions placeOptions)
         {
-            return PlacesApi(helper, null, sensor, placeOptions);
+            return PlacesApi(helper, GetApiKeyFromConfig(), sensor, placeOptions);
         }
 
         /// <summary>
@@ -202,7 +205,12 @@ namespace GoogleMapsHelpers
         /// <returns></returns>
         public static IHtmlString PlacesApi(this HtmlHelper helper, PlaceOptions placeOptions)
         {
-            return PlacesApi(helper, null, false, placeOptions);
+            return PlacesApi(helper, GetApiKeyFromConfig(), false, placeOptions);
+        }
+
+        private static string GetApiKeyFromConfig()
+        {
+            return ConfigurationManager.AppSettings[Constants.GoogleMapsApiKey];
         }
     }
 }

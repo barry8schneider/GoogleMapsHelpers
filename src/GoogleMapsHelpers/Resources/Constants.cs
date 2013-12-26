@@ -48,5 +48,10 @@ namespace GoogleMapsHelpers.Resources
         internal static string Amp = "&";
         internal static string ApiAttribute = "key=";
         internal static string LibrariesKey = "libraries=";
+
+        /* Configuration File Constants
+         * ============================ */
+
+        internal static string GoogleMapsApiKey = "GoogleMapsApiKey";
     }
 }

@@ -36,5 +36,14 @@ namespace GoogleMapsHelpers.Tests
 
             StringAssert.Contains(actual, expected);
         }
+
+        [TestMethod]
+        public void GoogleMapsHelpersExtension_StaticMapsApi_ConfigTest()
+        {
+            var expected = new HtmlString("<script src=\"" + SourceAddressFactory.GetSourceAddress(null, true, Libraries.None) + "\" type=\"text/javascript\"></script>").ToString();
+            var actual = new HtmlHelper(new ViewContext(), new ViewPage()).StaticMapsApi(new MapOptions("Baltimore, MD")).ToString();
+
+            StringAssert.Contains(actual, expected);
+        }
     }
 }
