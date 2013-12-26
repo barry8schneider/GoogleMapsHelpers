@@ -3,4 +3,4 @@ GoogleMapsHelpers
 
 ASP.NET MVC HTML Helper Extensions for Google Maps
 
-Please visit project homepage for sample: googlemapshelpers.namedquery.com
+Please visit project [Project Homepage](http://gmh.namedquery.com/ "GoogleMapsHelpers Project Homepage") for more information.
