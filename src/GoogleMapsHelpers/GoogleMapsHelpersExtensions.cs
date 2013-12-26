@@ -66,8 +66,8 @@ namespace GoogleMapsHelpers
             directionBoxBuilder.MergeAttribute(Constants.Id, "direction-panel");
 
             return new HtmlString(
-                searchBoxBuilder.ToString(TagRenderMode.SelfClosing) + 
-                builder.ToString(TagRenderMode.Normal) + 
+                searchBoxBuilder.ToString(TagRenderMode.SelfClosing) +
+                builder.ToString(TagRenderMode.Normal) +
                 directionBoxBuilder.ToString(TagRenderMode.Normal));
         }
 
@@ -166,6 +166,43 @@ namespace GoogleMapsHelpers
             return new HtmlString(
                 apiScriptTagBuilder.GetResult() +
                 placeOptionsScriptTagBuilder.GetResult());
+        }
+
+        /// <summary>
+        /// Creates Places API scripts
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="sensor"></param>
+        /// <param name="placeOptions"></param>
+        /// <returns></returns>
+        public static IHtmlString PlacesApi(this HtmlHelper helper, bool sensor,
+            PlaceOptions placeOptions)
+        {
+            return PlacesApi(helper, null, sensor, placeOptions);
+        }
+
+        /// <summary>
+        /// Creates Places API Scripts
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="apiKey"></param>
+        /// <param name="placeOptions"></param>
+        /// <returns></returns>
+        public static IHtmlString PlacesApi(this HtmlHelper helper, string apiKey,
+            PlaceOptions placeOptions)
+        {
+            return PlacesApi(helper, apiKey, false, placeOptions);
+        }
+
+        /// <summary>
+        /// Creates Places API Scripts
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="placeOptions"></param>
+        /// <returns></returns>
+        public static IHtmlString PlacesApi(this HtmlHelper helper, PlaceOptions placeOptions)
+        {
+            return PlacesApi(helper, null, false, placeOptions);
         }
     }
 }
