@@ -7,6 +7,8 @@
  * Description: 
  * ============================================================= */
 
+using System.Collections.Generic;
+
 namespace GoogleMapsHelpers
 {
     /// <summary>
@@ -22,6 +24,14 @@ namespace GoogleMapsHelpers
         /// Addresses used to display multiple markers on Google Maps
         /// </summary>
         public string[] Addresses { get; set; }
+        /// <summary>
+        /// Addresses used to display multiple markers and descriptions displayed on the marker on Google Maps
+        /// </summary>
+        public Dictionary<string, string> AddressesWithDescription { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public KeyValuePair<string, string> AddressWithDescription { get; set; } 
         /// <summary>
         /// Int value reprsenting Zoom of Google Maps
         /// </summary>
@@ -82,6 +92,46 @@ namespace GoogleMapsHelpers
         public MapOptions(string[] addresses, MapTypes? mapType)
         {
             Addresses = addresses;
+            MapType = mapType;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of MapOptions class
+        /// </summary>
+        /// <param name="addressWithDesc"></param>
+        public MapOptions(KeyValuePair<string, string> addressWithDesc)
+        {
+            AddressWithDescription = addressWithDesc;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of MapOptions class
+        /// </summary>
+        /// <param name="addressWithDesc"></param>
+        /// <param name="mapType"></param>
+        public MapOptions(KeyValuePair<string, string> addressWithDesc, MapTypes? mapType)
+        {
+            AddressWithDescription = addressWithDesc;
+            MapType = mapType;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of MapOptions class
+        /// </summary>
+        /// <param name="addressesWithDesc"></param>
+        public MapOptions(Dictionary<string, string> addressesWithDesc)
+        {
+            AddressesWithDescription = addressesWithDesc;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of MapOptions class
+        /// </summary>
+        /// <param name="addressesWithDesc"></param>
+        /// <param name="mapType"></param>
+        public MapOptions(Dictionary<string, string> addressesWithDesc, MapTypes? mapType)
+        {
+            AddressesWithDescription = addressesWithDesc;
             MapType = mapType;
         }
     }
