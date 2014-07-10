@@ -17,6 +17,10 @@ namespace GoogleMapsHelpers
     public class MapOptions
     {
         /// <summary>
+        /// Display Info Window automatically on Google Maps
+        /// </summary>
+        public bool DisplayInfoWindow { get; set; }
+        /// <summary>
         /// Address used to display a single marker on Google Maps
         /// </summary>
         public string Address { get; set; }
@@ -31,7 +35,16 @@ namespace GoogleMapsHelpers
         /// <summary>
         /// 
         /// </summary>
-        public KeyValuePair<string, string> AddressWithDescription { get; set; } 
+        public KeyValuePair<string, string> AddressWithDescription { get; set; }
+        /// <summary>
+        /// Int value reprsenting Zoom of Google Maps
+        /// </summary>
+        /// 
+        public Dictionary<string, string> AddressesWithTitle { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public KeyValuePair<string, string> AddressWithTitle { get; set; }
         /// <summary>
         /// Int value reprsenting Zoom of Google Maps
         /// </summary>
@@ -99,9 +112,10 @@ namespace GoogleMapsHelpers
         /// Initializes a new instance of MapOptions class
         /// </summary>
         /// <param name="addressWithDesc"></param>
-        public MapOptions(KeyValuePair<string, string> addressWithDesc)
+        public MapOptions(KeyValuePair<string, string> addressWithDesc, bool displayInfoWindow = false)
         {
             AddressWithDescription = addressWithDesc;
+            DisplayInfoWindow = displayInfoWindow;
         }
 
         /// <summary>
@@ -109,19 +123,21 @@ namespace GoogleMapsHelpers
         /// </summary>
         /// <param name="addressWithDesc"></param>
         /// <param name="mapType"></param>
-        public MapOptions(KeyValuePair<string, string> addressWithDesc, MapTypes? mapType)
+        public MapOptions(KeyValuePair<string, string> addressWithDesc, MapTypes? mapType, bool displayInfoWindow = false)
         {
             AddressWithDescription = addressWithDesc;
             MapType = mapType;
+            DisplayInfoWindow = displayInfoWindow;
         }
 
         /// <summary>
         /// Initializes a new instance of MapOptions class
         /// </summary>
         /// <param name="addressesWithDesc"></param>
-        public MapOptions(Dictionary<string, string> addressesWithDesc)
+        public MapOptions(Dictionary<string, string> addressesWithDesc, bool displayInfoWindow = false)
         {
             AddressesWithDescription = addressesWithDesc;
+            DisplayInfoWindow = displayInfoWindow;
         }
 
         /// <summary>
@@ -129,10 +145,12 @@ namespace GoogleMapsHelpers
         /// </summary>
         /// <param name="addressesWithDesc"></param>
         /// <param name="mapType"></param>
-        public MapOptions(Dictionary<string, string> addressesWithDesc, MapTypes? mapType)
+        public MapOptions(Dictionary<string, string> addressesWithDesc, MapTypes? mapType, bool displayInfoWindow = false)
         {
             AddressesWithDescription = addressesWithDesc;
             MapType = mapType;
+            DisplayInfoWindow = displayInfoWindow;
         }
+
     }
 }

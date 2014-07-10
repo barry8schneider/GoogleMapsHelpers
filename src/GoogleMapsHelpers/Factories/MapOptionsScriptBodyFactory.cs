@@ -48,21 +48,23 @@ namespace GoogleMapsHelpers.Builders
             }
             else if (!string.IsNullOrEmpty(_mapOptions.AddressWithDescription.Key))
             {
-                AddMarkerWithDescription(_mapOptions.AddressWithDescription);
+                AddMarkerWithDescription(_mapOptions.AddressWithDescription, _mapOptions.DisplayInfoWindow);
             }
             else if (_mapOptions.AddressesWithDescription != null && _mapOptions.AddressesWithDescription.Count > 0)
             {
-                AddMarkersWithDescription(_mapOptions.AddressesWithDescription);
+                AddMarkersWithDescription(_mapOptions.AddressesWithDescription,_mapOptions.DisplayInfoWindow);
             }
+            
 
             MapOptionsScritBodyBuilder.Append(
                      "m=new google.maps.Map(document.getElementById('map-canvas'),o);").Append(
                      "b=new google.maps.LatLngBounds();");
-
-            MapOptionsScritBodyBuilder.Append(
-             "}").Append(
-             "google.maps.event.addDomListener(window, 'load', i);");
-
+            if (!_mapOptions.DisplayInfoWindow)
+            {
+                MapOptionsScritBodyBuilder.Append(
+                 "}").Append(
+                 "google.maps.event.addDomListener(window, 'load', i);");
+            }
             return MapOptionsScritBodyBuilder.ToString();
         }
 
@@ -132,7 +134,7 @@ namespace GoogleMapsHelpers.Builders
         }
 
         public static void AddMarkerWithDescription(
-            KeyValuePair<string, string> addressWithDesc,
+            KeyValuePair<string, string> addressWithDesc, bool displayInfoWindow,
             bool useFitBound = false)
         {
             MapOptionsScritBodyBuilder.Append(
@@ -141,13 +143,21 @@ namespace GoogleMapsHelpers.Builders
                             "m.setCenter(r[0].geometry.location);").Append(
                             "var iw=new google.maps.InfoWindow({").Append(
                                 "content:\"").Append(addressWithDesc.Value +
-                            "\"});").Append(
+                            "\"});");
+                            if (displayInfoWindow)
+                            {
+                               MapOptionsScritBodyBuilder.Append("iw.open(m);");
+                            }
+                            else
+                            {
+                                MapOptionsScritBodyBuilder.Append(
                             "var k=new google.maps.Marker({").Append(
                                 "map:m,").Append(
                                 "position:r[0].geometry.location,").Append(
                                 "title:'").Append(addressWithDesc.Key).Append("'").Append(
                             "});").Append(
                             "google.maps.event.addListener(k,'click',function(){iw.open(m,k);});");
+                            }
 
             if (useFitBound)
                 MapOptionsScritBodyBuilder.Append(
@@ -159,36 +169,13 @@ namespace GoogleMapsHelpers.Builders
                     "});");
         }
 
-
-
-        public static void AddMarkerWithTitle(
-           KeyValuePair<string, string> addressWithDesc,
-           bool useFitBound = false)
+        private static void AddMarkersWithDescription(
+           Dictionary<string, string> adddressesWithDescs, bool displayInfoWindow)
         {
-            MapOptionsScritBodyBuilder.Append(
-                    "g.geocode({'address':'").Append(addressWithDesc.Key).Append("'},function(r,s){").Append(
-                        "if(s==google.maps.GeocoderStatus.OK){").Append(
-                            "m.setCenter(r[0].geometry.location);").Append(
-                            "var iw=new google.maps.InfoWindow({").Append(
-                                "content:\"").Append(addressWithDesc.Value +
-                            "\"});").Append(
-                            "infowindow.open(m);");
-
-            if (useFitBound)
-                MapOptionsScritBodyBuilder.Append(
-                            "b.extend(r[0].geometry.location);").Append(
-                            "m.fitBounds(b);");
-
-            MapOptionsScritBodyBuilder.Append(
-                        "}").Append(
-                    "});");
+            foreach (var t in adddressesWithDescs)
+                AddMarkerWithDescription(t, displayInfoWindow, true);
         }
 
-        private static void AddMarkersWithTitle(
-            Dictionary<string, string> addressesWithTitles)
-        {
-            foreach (var t in addressesWithTitles)
-                AddMarkerWithTitle(t, true);
-        }
+        
     }
 }
