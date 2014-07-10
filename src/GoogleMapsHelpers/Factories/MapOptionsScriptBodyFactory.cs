@@ -159,11 +159,36 @@ namespace GoogleMapsHelpers.Builders
                     "});");
         }
 
-        private static void AddMarkersWithDescription(
-            Dictionary<string, string> adddressesWithDescs)
+
+
+        public static void AddMarkerWithTitle(
+           KeyValuePair<string, string> addressWithDesc,
+           bool useFitBound = false)
         {
-            foreach (var t in adddressesWithDescs)
-                AddMarkerWithDescription(t, true);
+            MapOptionsScritBodyBuilder.Append(
+                    "g.geocode({'address':'").Append(addressWithDesc.Key).Append("'},function(r,s){").Append(
+                        "if(s==google.maps.GeocoderStatus.OK){").Append(
+                            "m.setCenter(r[0].geometry.location);").Append(
+                            "var iw=new google.maps.InfoWindow({").Append(
+                                "content:\"").Append(addressWithDesc.Value +
+                            "\"});").Append(
+                            "infowindow.open(m);");
+
+            if (useFitBound)
+                MapOptionsScritBodyBuilder.Append(
+                            "b.extend(r[0].geometry.location);").Append(
+                            "m.fitBounds(b);");
+
+            MapOptionsScritBodyBuilder.Append(
+                        "}").Append(
+                    "});");
+        }
+
+        private static void AddMarkersWithTitle(
+            Dictionary<string, string> addressesWithTitles)
+        {
+            foreach (var t in addressesWithTitles)
+                AddMarkerWithTitle(t, true);
         }
     }
 }
